@@ -1,5 +1,9 @@
 pipeline {
-    agent 'SuperAgent'
+    agent {
+          node {
+             label 'SuperAgent'
+           }
+        }
 
     stages {
         stage('Build') {
