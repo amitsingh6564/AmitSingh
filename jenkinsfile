@@ -7,26 +7,18 @@ pipeline {
 
     stages {
         stage('Build') {
-            container ('node') {
+            agent { label 'SuperAgent' }
             steps {
                 echo 'Building..'
                 sh '''
                 '''
-              }
             }
         }
     }
-
 
     post {
         success {
             echo 'This will run only if successful'
         }
     }
-	
-	}
-	
-	
-	
-	
-
+}
