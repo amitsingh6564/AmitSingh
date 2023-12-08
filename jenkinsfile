@@ -1,29 +1,26 @@
-pipleline
-{
-agent any
+pipeline {
+    agent any
 
-stages{
+    stages {
+        stage('checkout') {
+            steps {
+                checkout(
+                    scm: [
+                        $class: 'GitSCM',
+                        branches: [[name: '*/main']],
+                        extensions: [],
+                        userRemoteConfigs: [[credentialsId: 'jenkins-example-pat-github', url: 'https://github.com/amitsingh6564/AS-Test.git']]
+                    ]
+                )
+            }
+        }
 
-stage('checkout')
-{
-steps{
-checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'jenkins-example-pat-github', url: 'https://github.com/amitsingh6564/AS-Test.git']])
-
+        stage('build') {
+            steps {
+                script {
+                    sh 'echo "hello"'
+                }
+            }
+        }
+    }
 }
-
-
-}
-
-stage('build'){
-steps{
-
-   script{
-       sh 'echo "hello""'
-   
-   }
-
-}
-}
-}
-}
-	
